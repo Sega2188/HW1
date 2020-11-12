@@ -115,7 +115,12 @@ class DoneCommand(BaseCommand):
         return 'done'
 
     def perform(self, objects, *args, **kwargs):
-        ListCommand().perform(objects)
+        if len(objects) == 0:
+            print('There are no items in storage.')
+            return
+
+        for index, obj in enumerate(objects):
+            print('{}: {}'.format(index, str(obj)))
 
         try:
             index = int(input('Input object index: '))
